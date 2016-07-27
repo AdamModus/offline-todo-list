@@ -1,0 +1,19 @@
+{
+    "name": "AdamMode-website",
+    "version": "1.0.0",
+    "description": "My personal website",
+    "author": "Rafael Fernandes <rafatexfr@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AdamModus/adammode.xyz"
+    },
+    "scripts": {},
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+        "browser-sync": "^2.13.0",
+        "gulp": "^3.9.1",
+        "gulp-sass": "^2.3.2",
+        "gulp-server-livereload": "^1.8.1"
+    }
+}
