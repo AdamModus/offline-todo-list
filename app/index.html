@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>TODO List!</title>
+    <title>Surviving to the offline status</title>
 
 </head>
 <script>
@@ -24,28 +24,32 @@
         });
     }
 </script>
-<body>
+<body class="surviving-offline">
+    <header>
+        <h1>Surviving to the offline status</h1>
+    </header>
 
-<main>
-    <h1>Did you know that Rafa is super awesome?</h1>
-</main>
-
-<button id="CleanDB">Clean Database</button>
-
-<form id="createTODO">
-    Name:<br>
-    <input type="text" name="name"><br>
-    Text:<br>
-    <input type="text" name="text"><br>
-    email:<br>
-    <input type="text" name="email"><br>
-    <br>
-    <input type="submit" value="Submit">
-</form>
-
-<div class="card-container">
-</div>
-
+    <div class="offline-body">
+        <main class="offline-content">
+            <div class="card-container">
+            </div>
+        </main>
+        <nav class="offline-nav">
+            <form id="createTODO" class="create-todo-form">
+                Name:<br>
+                <input type="text" name="name"><br>
+                Text:<br>
+                <!--<input type="text" name="text"><br>-->
+                <textarea rows="4" name="text" form="createTODO"></textarea><br>
+                E-mail:<br>
+                <input type="text" name="email"><br>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+            <hr>
+            <button id="CleanDB">Clean Database</button>
+        </nav>
+    </div>
 </body>
 
 

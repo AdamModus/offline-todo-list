@@ -1,0 +1,53 @@
+/*
+    Main CSS
+*/
+h1{
+    color: #FFFFFF;
+    font-size: 2rem;
+}
+
+header{
+    text-align: center;
+    background-color: #3e5e85;
+    height: 60px;
+}
+
+.surviving-offline{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.offline-body{
+    display: flex;
+    flex: 1;
+}
+
+.offline-nav{
+    background-color: #FFFFFF;
+    order: 0;
+    /* 16em is the width of the columns */
+    flex: 0 0 16em;
+    max-width: 16em;
+    padding: 8px;
+}
+.offline-nav.create-todo-form{
+    width: 100%;
+    max-width: 16em;
+}
+
+.create-todo-form input {
+    width: 100%;
+}
+
+.create-todo-form textarea {
+    width: 100%;
+    resize:vertical ;
+}
+
+.offline-content{
+    height: calc(100vh - 60px);
+    order: 1;
+    flex: 1;
+    overflow-y: scroll;
+}
