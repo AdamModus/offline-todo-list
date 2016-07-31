@@ -34,4 +34,7 @@ bower_components
 .node_repl_history
 .idea/adammode.xyz.iml
 
+# Settings folder for JetBrain's IDE (IntelliJ, WebStorm,...)
+.idea/
+
 .DS_Store
