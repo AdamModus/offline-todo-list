@@ -3,7 +3,6 @@
 // What should I cache?
 var urlsToCache = [
     // js assets
-    'js/offline-main.js',
     'js/main.js',
     'js/IndexedDBLayer.js',
     'js/TodoListDB.js',
@@ -14,7 +13,9 @@ var urlsToCache = [
     'style/external/cards.css',
     'style/external/vanillatoasts.css',
     // img assets
-    'imgs/south-park.jpg'
+    'imgs/south-park.jpg',
+    // html assets
+    'index.html'
 ];
 
 // Cache name - should be changed whenever significant changes are made
@@ -68,6 +69,7 @@ self.addEventListener('activate', function (event) {
 });
 
 var deleteAllCache = function () {
+    console.log('Trying to delete all the cache? but why?');
     var cacheWhitelist = `this should never be a cache name!!! this thing cost me way too much time!!`;
     caches.keys().then(function (keyList) {
         return Promise.all(keyList.map(function (key) {
@@ -87,6 +89,7 @@ var doesRequestAcceptHtml = function (request) {
 };
 
 self.addEventListener('fetch', function (event) {
+    deleteOldCaches();
     console.log("Intercepted a fetch: " + event.request);
     //event.respondWith(new Response("Hello world!"));
     event.respondWith(
