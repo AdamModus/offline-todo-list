@@ -2,14 +2,18 @@
     Main CSS
 */
 h1{
-    color: #FFFFFF;
+    color: #585858;
     font-size: 2rem;
+    margin-top: 8px;
 }
 
 header{
     text-align: center;
-    background-color: #3e5e85;
-    height: 60px;
+    height: 88px;
+    background-color: #F7F7F7;
+    background-image: url("../../imgs/offline-rex.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .surviving-offline{
@@ -24,7 +28,8 @@ header{
 }
 
 .offline-nav{
-    background-color: #FFFFFF;
+    color: #F7F7F7;
+    background-color: #585858;
     order: 0;
     /* 16em is the width of the columns */
     flex: 0 0 16em;
@@ -46,7 +51,7 @@ header{
 }
 
 .offline-content{
-    height: calc(100vh - 60px);
+    height: calc(100vh - 88px);
     order: 1;
     flex: 1;
     overflow-y: scroll;
