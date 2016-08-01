@@ -33,7 +33,9 @@ bower_components
 # Optional REPL history
 .node_repl_history
 
-# Mac OSX
+.idea/
+# Settings folder for JetBrain's IDE (IntelliJ, WebStorm,...)
+
 .DS_Store
 
 # Webstorm
