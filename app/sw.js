@@ -13,9 +13,7 @@ var urlsToCache = [
     'style/external/cards.css',
     'style/external/vanillatoasts.css',
     // img assets
-    'imgs/south-park.jpg',
-    // html assets
-    'index.html'
+    'imgs/offline-rex.jpg'
 ];
 
 // Cache name - should be changed whenever significant changes are made
@@ -91,7 +89,6 @@ var doesRequestAcceptHtml = function (request) {
 self.addEventListener('fetch', function (event) {
     deleteOldCaches();
     console.log("Intercepted a fetch: " + event.request);
-    //event.respondWith(new Response("Hello world!"));
     event.respondWith(
         caches.match(event.request)
             .then(function (response) {

@@ -82,6 +82,9 @@ class Cards {
         let screenX = this.currentX - this.startX;
         const threshold = this.targetBCR.width * 0.35;
         if (Math.abs(screenX) > threshold) {
+            if (typeof this.onCardDelete === 'function'){
+                this.onCardDelete(this.target);
+            }
             this.targetX = (screenX > 0) ?
                 this.targetBCR.width :
                 -this.targetBCR.width;
@@ -184,5 +187,3 @@ class Cards {
         this.target = null;
     }
 }
-
-window.addEventListener('load', () => new Cards());

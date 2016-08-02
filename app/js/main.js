@@ -22,7 +22,10 @@ function populateCards(todos) {
     for (let todo of todos) {
         addCard(todo);
     }
-    new Cards();
+    var cards = new Cards();
+    cards.onCardDelete = function(index){
+        console.log('you killed me, why ?', index);
+    }
 }
 
 
