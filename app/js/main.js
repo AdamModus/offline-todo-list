@@ -78,12 +78,13 @@ document.getElementById("createTODO").onsubmit = function (evt) {
 
     var form = document.getElementById('createTODO');
     var inputs = form.querySelectorAll('input[type="text"');
+    var textareas = form.querySelectorAll('textarea');
     var todoJson = {
         id: todoList.length,
         name: inputs[0].value,
         status: "TODO",
-        text: inputs[1].value,
-        email: inputs[2].value,
+        text: textareas[0].value,
+        email: inputs[1].value,
         dateTime: (() => {
             var curr = new Date().toISOString().split('T');
             return curr[0] + ' ' + curr[1].substring(0, 8);
