@@ -1,11 +1,16 @@
-#UNDER CONSTRUCTION
+#EXPERIMENT UNDER CONSTRUCTION
 
-# AdamMode's Personal Website Repo
-This is the repo I'm using for my personal website and possibly for some experiments I'd like to publish there as well.
+# Surviving the offline status
+This repo is hosting the evolving experiment of creating a Progressive Web App: Our simple TODO List manager
 Feel free to copy or use anything you like in here for learning or experimenting yourself! :)
+
+# Technologies explored so far:
+* Service Workers.
+* IndexedDB.
 
 # Setup
 * Install node
 * Run npm install
-* Run bower install
+* Install gulp globally
 * Run gulp
+* Have fun!
