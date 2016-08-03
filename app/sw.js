@@ -89,7 +89,7 @@ var doesRequestAcceptHtml = function (request) {
 
 self.addEventListener('fetch', function (event) {
     deleteOldCaches();
-    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Intercepted a fetch: ' + event.request);
+    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Intercepted a fetch: ', event.request);
     event.respondWith(
         caches.match(event.request)
             .then(function (response) {

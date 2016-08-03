@@ -51,7 +51,7 @@ let TodoListDB = (function () {
 
                     db.onerror = function (event) {
                         // Generic error handler for all errors targeted at this database's requests!
-                        console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Database error: ' + event.target.errorCode);
+                        console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Database error: ', event.target.errorCode);
                         reject(event);
                     };
 
