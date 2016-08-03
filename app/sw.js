@@ -7,6 +7,7 @@ var urlsToCache = [
     'js/main.js',
     'js/IndexedDBLayer.js',
     'js/TodoListDB.js',
+    'js/setDefaultTODOs.js',
     'js/external/cards.js',
     'js/external/vanillatoasts.js',
     // css assets
