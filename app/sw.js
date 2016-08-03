@@ -58,17 +58,17 @@ function updateCache() {
 // If all the files are successfully cached, then the service worker is installed.
 self.addEventListener('install', function (event) {
     // Perform install steps
-    console.log('Service worker was installed!');
+    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Installed !');
     event.waitUntil(updateCache());
 });
 
 // After the service worker is installed, it is then activated, meaning it can start controlling what the user gets!
 self.addEventListener('activate', function (event) {
-    console.log(`You're good to go!`);
+    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Activated !');
 });
 
 var deleteAllCache = function () {
-    console.log('Trying to delete all the cache? but why?');
+    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Deleting all cache :(');
     var cacheWhitelist = `this should never be a cache name!!! this thing cost me way too much time!!`;
     caches.keys().then(function (keyList) {
         return Promise.all(keyList.map(function (key) {
@@ -89,13 +89,13 @@ var doesRequestAcceptHtml = function (request) {
 
 self.addEventListener('fetch', function (event) {
     deleteOldCaches();
-    console.log("Intercepted a fetch: " + event.request);
+    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Intercepted a fetch: ' + event.request);
     event.respondWith(
         caches.match(event.request)
             .then(function (response) {
                 // Cache hit - return response
                 if (response) {
-                    console.log('Cache hit! No need for the server to work here!');
+                    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Cache hit! No need for the server to work here :)');
                     return response;
                 }
 

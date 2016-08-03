@@ -35,12 +35,12 @@ let TodoListDB = (function () {
             var openDBRequest = window.indexedDB.open(this[storeName], dbVersion);
             return new Promise(function (resolve, reject) {
                 openDBRequest.onerror = function (event) {
-                    console.log("Why didn't you allow my web app to use IndexedDB?!");
+                    console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Why didn\'t you allow my web app to use IndexedDB?!');
                     reject(event);
                 };
 
                 openDBRequest.onsuccess = function (event) {
-                    console.log('You can now add stuff to the database');
+                    console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'You can now add stuff to the database.');
                     self[idbLayer] = new IndexedDBLayer(event.target.result, self[storeName]);
                     resolve(event);
                 };
@@ -51,7 +51,7 @@ let TodoListDB = (function () {
 
                     db.onerror = function (event) {
                         // Generic error handler for all errors targeted at this database's requests!
-                        console.log("Database error: " + event.target.errorCode);
+                        console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Database error: ' + event.target.errorCode);
                         reject(event);
                     };
 
@@ -69,7 +69,7 @@ let TodoListDB = (function () {
                     // Use transaction oncomplete to make sure the objectStore creation is
                     // finished before adding data into it.
                     todoStore.transaction.oncomplete = function (event) {
-                        console.log('You can now add stuff to the database');
+                        console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Transaction complete.');
                         self[idbLayer] = new IndexedDBLayer(event.target.result, self[storeName]);
                         resolve();
                     };
