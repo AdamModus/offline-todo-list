@@ -78,29 +78,35 @@ let TodoListDB = (function () {
         }
 
         list() {
+            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'List all TODO');
             return this[idbLayer].list();
         }
 
 
         getTodo(id) {
+            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Get TODO with id: ', id);
             return this[idbLayer].get(id);
         }
 
 
         addTodo(todoJson) {
+            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Adding a new TODO');
             return this[idbLayer].insert(todoJson);
         }
 
 
         updateTodo(todoJson) {
+            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Updating a TODO');
             return this[idbLayer].update(todoJson);
         }
 
         deleteTodo(id) {
+            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Delete TODO with id: ', id);
             return this[idbLayer].delete(id);
         }
 
         clearAll() {
+            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Clear all :(');
             return this[idbLayer].clearAll();
         }
     }

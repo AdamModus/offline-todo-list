@@ -17,7 +17,7 @@
         // });
         navigator.serviceWorker.register('sw.js', {scope: './'}).then(function (registration) {
             // Registration was successful! :)
-            console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'successfully registered with scope:', registration.scope);
+            console.log('%c Service workers: ', 'color:black; background-color: #FFD700', '1. registered with scope:', registration.scope, ' Installing...');
         }).catch(function (err) {
             // Registration failed :(
             console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'ServiceWorker registration failed: ', err);

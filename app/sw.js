@@ -33,6 +33,7 @@ var isLatestCacheName = (key) => {
 
 // deletes all caches that are out of date / version
 var deleteOldCaches = function () {
+  console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Checking for old caches.');
     var getOldCacheKeys = function () {
         return caches.keys().then(function (keys) {
             return keys.filter(function (key) {
@@ -58,13 +59,14 @@ function updateCache() {
 // If all the files are successfully cached, then the service worker is installed.
 self.addEventListener('install', function (event) {
     // Perform install steps
-    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Installed !');
+    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', '2. Installed, all the files are downloaded and cached successfully. Activating...');
     event.waitUntil(updateCache());
 });
 
 // After the service worker is installed, it is then activated, meaning it can start controlling what the user gets!
 self.addEventListener('activate', function (event) {
-    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Activated !');
+    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', '3. Activated.  Now is a good moment if we want to manage old caches.');
+    deleteOldCaches();
 });
 
 var deleteAllCache = function () {
@@ -88,8 +90,7 @@ var doesRequestAcceptHtml = function (request) {
 };
 
 self.addEventListener('fetch', function (event) {
-    deleteOldCaches();
-    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Intercepted a fetch: ', event.request);
+    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Fetch intercepted: ', event.request.url);
     event.respondWith(
         caches.match(event.request)
             .then(function (response) {
