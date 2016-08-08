@@ -32,7 +32,7 @@ let TodoListDB = (function () {
 
         init() {
             var self = this;
-            var openDBRequest = window.indexedDB.open(this[storeName], dbVersion);
+            var openDBRequest = indexedDB.open(this[storeName], dbVersion);
             return new Promise(function (resolve, reject) {
                 openDBRequest.onerror = function (event) {
                     console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Why didn\'t you allow my web app to use IndexedDB?!');
