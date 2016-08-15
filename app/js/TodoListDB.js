@@ -23,6 +23,10 @@ let TodoListDB = (function () {
     const idbLayer = Symbol('idbLayer');
     const storeName = Symbol('storeName'); // database name
 
+    //used for logging
+    const logTextColor = "white";
+    const logBackgroundColor = "#1E90FF";
+
     // indexedDB.deleteDatabase("TODOListStore")
 
     class TodoListDB {
@@ -35,12 +39,12 @@ let TodoListDB = (function () {
             var openDBRequest = indexedDB.open(this[storeName], dbVersion);
             return new Promise(function (resolve, reject) {
                 openDBRequest.onerror = function (event) {
-                    console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Why didn\'t you allow my web app to use IndexedDB?!');
+                    console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Why didn\'t you allow my web app to use IndexedDB?!');
                     reject(event);
                 };
 
                 openDBRequest.onsuccess = function (event) {
-                    console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'You can now add stuff to the database.');
+                    console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'You can now add stuff to the database.');
                     self[idbLayer] = new IndexedDBLayer(event.target.result, self[storeName]);
                     resolve(event);
                 };
@@ -51,7 +55,7 @@ let TodoListDB = (function () {
 
                     db.onerror = function (event) {
                         // Generic error handler for all errors targeted at this database's requests!
-                        console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Database error: ', event.target.errorCode);
+                        console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Database error: ', event.target.errorCode);
                         reject(event);
                     };
 
@@ -69,7 +73,7 @@ let TodoListDB = (function () {
                     // Use transaction oncomplete to make sure the objectStore creation is
                     // finished before adding data into it.
                     todoStore.transaction.oncomplete = function (event) {
-                        console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Transaction complete.');
+                        console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Transaction complete.');
                         self[idbLayer] = new IndexedDBLayer(event.target.result, self[storeName]);
                         resolve();
                     };
@@ -78,35 +82,35 @@ let TodoListDB = (function () {
         }
 
         list() {
-            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'List all TODO');
+            console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'List all TODO');
             return this[idbLayer].list();
         }
 
 
         getTodo(id) {
-            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Get TODO with id: ', id);
+            console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Get TODO with id: ', id);
             return this[idbLayer].get(id);
         }
 
 
         addTodo(todoJson) {
-            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Adding a new TODO');
+            console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Adding a new TODO');
             return this[idbLayer].insert(todoJson);
         }
 
 
         updateTodo(todoJson) {
-            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Updating a TODO');
+            console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Updating a TODO');
             return this[idbLayer].update(todoJson);
         }
 
         deleteTodo(id) {
-            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Delete TODO with id: ', id);
+            console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Delete TODO with id: ', id);
             return this[idbLayer].delete(id);
         }
 
         clearAll() {
-            console.log('%c IndexedDB: ', 'color:white; background-color: #1E90FF', 'Clear all :(');
+            console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Clear all :(');
             return this[idbLayer].clearAll();
         }
     }

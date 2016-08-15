@@ -1,70 +1,166 @@
+"use strict";
+
+const logTextColor = "#33cc33";
+const logBackgroundColor = "#000";
+
+
+try {
+    importScripts("IndexedDBLayer.js", "TodoListDB.js");
+    console.log("%c WebWorker: ", "color: " + logTextColor + "; background-color: " + logBackgroundColor, "IndexedDB related scripts were imported successfully");
+} catch (err) {
+    console.log("%c WebWorker: ", "color: " + logTextColor + "; background-color: " + logBackgroundColor, "IndexedDB related scripts were imported successfully");
+}
+
+var dbReady = false;
 var dbManager = new TodoListDB();
 dbManager.init().then(function () {
-    dbManager.list().then(function (result) {
-        todoList = result;
-        populateCards(result);
-    }, function (error) {
-        VanillaToasts.create({
-            title: 'Not able to list TODOs',
-            text: error.target.error, // little text with error log
-            type: 'error', // success, info, warning, error   / optional parameter
-            timeout: 3000, // hide after 5000ms, // optional paremter
-            callback: Function.prototype // executed when toast is clicked / optional parameter
-        });
-    });
+    dbReady = true;
+    list();
 });
 
 function list() {
-
+    dbManager.list().then(function (result) {
+        sendSuccess({
+            cmd: "list",
+            result: result
+        });
+    }, function (error) {
+        sendError({
+            title: "Not able to list TODOs",
+            text: "There was a problem listing all TODOs \n" + error.target.error
+        });
+    });
 }
 
 function get(id) {
-
+    dbManager.getTodo(id).then(function (result) {
+        sendSuccess({
+            cmd: "get",
+            result: result
+        });
+    }, function (error) {
+        sendError({
+            title: "Not able to get TODO",
+            text: "There was an exception while getting the TODO with id:" + id + "\n" + error.target.error
+        });
+    });
 }
 
 function insert(todoJson) {
-
+    dbManager.addTodo(todoJson).then(function (result) {
+        sendSuccess({
+            cmd: "insert",
+            result: result
+        });
+    }).catch(function (error) {
+        sendError({
+            title: "Not able to add TODO",
+            text: "There was an exception while inserting a TODO\n" + error.target.error
+        });
+    });
 }
 
 function update(todoJson) {
+    dbManager.addTodo(todoJson).then(function (result) {
+        sendSuccess({
+            cmd: "update",
+            result: result
+        });
+    }).catch(function (error) {
+        sendError({
+            title: "Not able to add TODO",
+            text: "There was an exception while updating the TODO with id:" + id + "\n" + error.target.error
+        });
+    });
+}
 
+function remove(id) {
+    dbManager.deleteTodo(id).then(function () {
+        sendSuccess({
+            cmd: "delete",
+            result: id
+        });
+    }, function (error) {
+        sendError({
+            title: "Not able to delete the TODO",
+            text: "There was an exception while deleting the TODO with id:" + id + "\n" + error.target.error
+        });
+    });
 }
 
 function clearAll() {
     dbManager.clearAll().then(function (result) {
-        var container = document.querySelector('.card-container');
-        container.innerHTML = "";
-        VanillaToasts.create({
-            title: 'Database cleared',
-            text: "All records were successfully deleted", // little text with error log
-            type: 'info', // success, info, warning, error   / optional parameter
-            timeout: 3000, // hide after 5000ms, // optional paremter
-            callback: Function.prototype // executed when toast is clicked / optional parameter
+        sendSuccess({
+            cmd: "clearAll",
+            result: result
         });
     }).catch(function (error) {
-        VanillaToasts.create({
+        sendError({
             title: 'Not able to clear TODO database',
             text: error.target.error, // little text with error log
-            type: 'error', // success, info, warning, error   / optional parameter
-            timeout: 3000, // hide after 5000ms, // optional paremter
-            callback: Function.prototype // executed when toast is clicked / optional parameter
         });
     });
 }
 
+function sendError(errorParams) {
+    self.postMessage({
+        cmd: "error",
+        val: {
+            title: errorParams.title,
+            text: errorParams.text,
+        }
+    });
+}
 
-self.addEventListener('message', function (e) {
-    var data = e.data;
+function sendSuccess(pmParams) {
+    self.postMessage({
+        cmd: "success",
+        val: {
+            cmd: pmParams.cmd,
+            result: pmParams.result
+        }
+    });
+}
+
+function filterAction(data) {
+    if (!dbReady) {
+        setTimeout(function () {
+            filterAction(data)
+        }, 50);
+        return;
+    }
 
     switch (data.cmd) {
         case 'list':
+            list();
             break;
-        case 'stop':
-
-            self.close(); // Terminates the worker.
+        case 'get':
+            get(data.val);
+            break;
+        case 'insert':
+            insert(data.val);
+            break;
+        case 'update':
+            update(data.val);
+            break;
+        case 'delete':
+            remove(data.val);
+            break;
+        case 'clearAll':
+            clearAll();
+            break;
+        case 'close':
+            close(); // Terminates the worker.
             break;
         default:
-            self.postMessage('Unknown command: ' + data.msg);
+            sendError({
+                title: "Unknown command",
+                text: "There was some strange mistake. An unknown command was sent and we don't know what to do about it"
+            });
     }
+}
 
+self.addEventListener('message', function (e) {
+    var data = e.data;
+    filterAction(data);
 }, false);

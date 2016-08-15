@@ -10,6 +10,7 @@ var urlsToCache = [
     'js/setDefaultTODOs.js',
     'js/external/cards.js',
     'js/external/vanillatoasts.js',
+    'js/wwdb.js',
     // css assets
     'style/css/main.css',
     'style/external/cards.css',
@@ -17,6 +18,10 @@ var urlsToCache = [
     // img assets
     'imgs/offline-rex.jpg'
 ];
+
+// used for logging
+const logTextColor = "black";
+const logBackgroundColor = "#FFD700";
 
 // Cache name - should be changed whenever significant changes are made
 var version = 1;
@@ -34,7 +39,7 @@ var isLatestCacheName = (key) => {
 
 // deletes all caches that are out of date / version
 var deleteOldCaches = function () {
-  console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Checking for old caches.');
+    console.log('%c Service workers: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Checking for old caches.');
     var getOldCacheKeys = function () {
         return caches.keys().then(function (keys) {
             return keys.filter(function (key) {
@@ -60,18 +65,18 @@ function updateCache() {
 // If all the files are successfully cached, then the service worker is installed.
 self.addEventListener('install', function (event) {
     // Perform install steps
-    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', '2. Installed, all the files are downloaded and cached successfully. Activating...');
+    console.log('%c Service workers: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, '2. Installed, all the files are downloaded and cached successfully. Activating...');
     event.waitUntil(updateCache());
 });
 
 // After the service worker is installed, it is then activated, meaning it can start controlling what the user gets!
 self.addEventListener('activate', function (event) {
-    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', '3. Activated.  Now is a good moment if we want to manage old caches.');
+    console.log('%c Service workers: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, '3. Activated.  Now is a good moment if we want to manage old caches.');
     deleteOldCaches();
 });
 
 var deleteAllCache = function () {
-    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Deleting all cache :(');
+    console.log('%c Service workers: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Deleting all cache :(');
     var cacheWhitelist = `this should never be a cache name!!! this thing cost me way too much time!!`;
     caches.keys().then(function (keyList) {
         return Promise.all(keyList.map(function (key) {
@@ -91,13 +96,13 @@ var doesRequestAcceptHtml = function (request) {
 };
 
 self.addEventListener('fetch', function (event) {
-    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Fetch intercepted: ', event.request.url);
+    console.log('%c Service workers: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Fetch intercepted: ', event.request.url);
     event.respondWith(
         caches.match(event.request)
             .then(function (response) {
                 // Cache hit - return response
                 if (response) {
-                    console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'Cache hit! No need for the server to work here :)');
+                    console.log('%c Service workers: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Cache hit! No need for the server to work here :)');
                     return response;
                 }
 

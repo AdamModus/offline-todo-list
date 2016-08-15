@@ -1,5 +1,125 @@
-var wworker = new Worker('wwdb.js');
+const vtTimeout = 3000;
+const vtCallback = Function.prototype;
+const vtType = {
+    error: "error",
+    info: "info",
+    success: "success"
+};
+
 var todoList = [];
+var wworker = new Worker('js/wwdb.js');
+wworker.onmessage = function (e) {
+    var data = e.data;
+    switch (data.cmd) {
+        case "success":
+            filterAction(data.val);
+            break;
+        case "error":
+            createToast({
+                title: data.val.title,
+                text: data.val.text,
+                type: vtType.error,
+                timeout: vtTimeout,
+                callback: vtCallback
+            });
+            break;
+        default:
+            createToast({
+                title: "Unknown command",
+                text: "There was some strange mistake. An unknown command was sent and we don't know what to do about it", // little text with error log
+                type: vtType.error, // success, info, warning, error   / optional parameter
+                timeout: vtTimeout, // hide after 5000ms, // optional parameter
+                callback: vtCallback // executed when toast is clicked / optional parameter
+            });
+    }
+};
+
+function filterAction(data) {
+    switch (data.cmd) {
+        case 'list':
+            populateCards(data.result);
+            reportSuccess({
+                title: "Listing all TODOs",
+                text: "The TODO list with all TODO elements should be visible now"
+            });
+            break;
+        case 'get':
+            reportSuccess({
+                title: "Retrieved a TODO",
+                text: "Retrieved a specific TODO with id:" + data.result.id
+            });
+            break;
+        case 'insert':
+            reportSuccess({
+                title: "Inserting a TODO",
+                text: "The TODO was successfully created"
+            });
+            break;
+        case 'update':
+            reportSuccess({
+                title: "Updated a TODO",
+                text: "The TODO with the id:" + data.result.id + " was successfully updated"
+            });
+            break;
+        case 'delete':
+            reportSuccess({
+                title: "Deleted a TODO",
+                text: "Deleted the TODO with id:" + data.result.id
+            });
+            break;
+        case 'clearAll':
+            reportSuccess({
+                title: "Deleted all TODOs",
+                text: "All TODOs were successfully deleted"
+            });
+            break;
+        case 'close':
+            self.close(); // Terminates the worker.
+            break;
+        default:
+            createToast({
+                title: "Unknown command",
+                text: "There was some strange mistake. An unknown command was sent and we don't know what to do about it", // little text with error log
+                type: vtType.error, // success, info, warning, error   / optional parameter
+                timeout: vtTimeout, // hide after 5000ms, // optional parameter
+                callback: vtCallback // executed when toast is clicked / optional parameter
+            });
+    }
+}
+
+function reportSuccess(params) {
+    createToast({
+        title: params.title,
+        text: params.text,
+        type: vtType.success,
+        timeout: vtTimeout,
+        callback: vtCallback
+    });
+}
+
+function createToast(params) {
+    VanillaToasts.create(params);
+}
+
+
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+////////////
+
 
 function generateCardHTML(todoJson) {
     var elem = document.createElement('div');
@@ -23,7 +143,7 @@ function populateCards(todos) {
         addCard(todo);
     }
     var cards = new Cards();
-    cards.onCardDelete = function(index){
+    cards.onCardDelete = function (index) {
         console.log('you killed me, why ?', index);
     }
 }
@@ -36,7 +156,9 @@ function addCard(todo) {
 
 
 document.getElementById("CleanDB").onclick = function () {
-
+    wworker.postMessage({
+        cmd: "clearAll"
+    });
 };
 
 document.getElementById("createTODO").onsubmit = function (evt) {
@@ -57,18 +179,8 @@ document.getElementById("createTODO").onsubmit = function (evt) {
         })()
     };
 
-    dbManager.addTodo(todoJson).then(function (result) {
-        addCard(todoJson);
-        todoList.push(todoJson);
-    }).catch(function (error) {
-        VanillaToasts.create({
-            title: 'TODO not added',
-            text: error.target.error, // little text with error log
-            type: 'error', // success, info, warning, error   / optional parameter
-            timeout: 3000, // hide after 5000ms, // optional paremeter
-            callback: Function.prototype // executed when toast is clicked / optional parameter
-        });
-    });
+    // addTODO
+
 
     return false;
 };
