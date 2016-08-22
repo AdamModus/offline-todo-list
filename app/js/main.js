@@ -50,6 +50,7 @@ function filterAction(data) {
             });
             break;
         case 'insert':
+            addCard(data.result);
             reportSuccess({
                 title: "Inserting a TODO",
                 text: "The TODO was successfully created"
@@ -74,7 +75,7 @@ function filterAction(data) {
             });
             break;
         case 'close':
-            self.close(); // Terminates the worker.
+            wworker.terminate(); // Terminates the worker.
             break;
         default:
             createToast({

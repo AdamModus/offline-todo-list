@@ -3,7 +3,6 @@
 const logTextColor = "#33cc33";
 const logBackgroundColor = "#000";
 
-
 try {
     importScripts("IndexedDBLayer.js", "TodoListDB.js");
     console.log("%c WebWorker: ", "color: " + logTextColor + "; background-color: " + logBackgroundColor, "IndexedDB related scripts were imported successfully");
@@ -150,7 +149,7 @@ function filterAction(data) {
             clearAll();
             break;
         case 'close':
-            close(); // Terminates the worker.
+            self.close(); // Terminates the worker.
             break;
         default:
             sendError({
