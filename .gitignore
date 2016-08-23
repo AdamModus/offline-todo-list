@@ -33,10 +33,7 @@ bower_components
 # Optional REPL history
 .node_repl_history
 
-.idea/
 # Settings folder for JetBrain's IDE (IntelliJ, WebStorm,...)
+.idea/
 
 .DS_Store
-
-# Webstorm
-.idea
