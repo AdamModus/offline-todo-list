@@ -49,7 +49,7 @@ function insert(todoJson) {
     dbManager.addTodo(todoJson).then(function (result) {
         sendSuccess({
             cmd: "insert",
-            result: result
+            result: todoJson
         });
     }).catch(function (error) {
         sendError({
@@ -63,7 +63,7 @@ function update(todoJson) {
     dbManager.addTodo(todoJson).then(function (result) {
         sendSuccess({
             cmd: "update",
-            result: result
+            result: todoJson
         });
     }).catch(function (error) {
         sendError({

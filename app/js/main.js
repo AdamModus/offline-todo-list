@@ -5,9 +5,19 @@ const vtType = {
     info: "info",
     success: "success"
 };
+const wwCommands = {
+    list: 'list',
+    get: 'get',
+    insert: 'insert',
+    update: 'update',
+    delete: 'delete',
+    clearAll: 'clearAll',
+    close: 'close'
+};
 
 var todoList = [];
 var wworker = new Worker('js/wwdb.js');
+
 wworker.onmessage = function (e) {
     var data = e.data;
     switch (data.cmd) {
@@ -37,45 +47,25 @@ wworker.onmessage = function (e) {
 function filterAction(data) {
     switch (data.cmd) {
         case 'list':
-            populateCards(data.result);
-            reportSuccess({
-                title: "Listing all TODOs",
-                text: "The TODO list with all TODO elements should be visible now"
-            });
+            listAction(data.result);
             break;
         case 'get':
-            reportSuccess({
-                title: "Retrieved a TODO",
-                text: "Retrieved a specific TODO with id:" + data.result.id
-            });
+            getAction(data.result.id);
             break;
         case 'insert':
-            addCard(data.result);
-            reportSuccess({
-                title: "Inserting a TODO",
-                text: "The TODO was successfully created"
-            });
+            insertAction(data.result);
             break;
         case 'update':
-            reportSuccess({
-                title: "Updated a TODO",
-                text: "The TODO with the id:" + data.result.id + " was successfully updated"
-            });
+            updateAction(data.result.id);
             break;
         case 'delete':
-            reportSuccess({
-                title: "Deleted a TODO",
-                text: "Deleted the TODO with id:" + data.result.id
-            });
+            deleteAction(data.result);
             break;
         case 'clearAll':
-            reportSuccess({
-                title: "Deleted all TODOs",
-                text: "All TODOs were successfully deleted"
-            });
+            clearAllAction();
             break;
         case 'close':
-            wworker.terminate(); // Terminates the worker.
+            closeAction();
             break;
         default:
             createToast({
@@ -98,33 +88,69 @@ function reportSuccess(params) {
     });
 }
 
+///////////////////////////////////////////////////////
+////////////// Actions ////////////////
+///////////////////////////////////////////////////////
 
-// Assigning actions to UI
-
-document.getElementById("CleanDB").onclick = function () {
-    wworker.postMessage({
-        cmd: "clearAll"
+function listAction(todos) {
+    todoList = todos.slice(0);
+    listCards(todos);
+    reportSuccess({
+        title: "Listing all TODOs",
+        text: "The TODO list with all TODO elements should be visible now"
     });
-};
+}
 
-document.getElementById("createTODO").onsubmit = function (evt) {
-    evt.preventDefault();
+function getAction(todoId) {
+    reportSuccess({
+        title: "Retrieved a TODO",
+        text: "Retrieved a specific TODO with id:" + todoId
+    });
+}
 
-    var form = document.getElementById('createTODO');
-    var inputs = form.querySelectorAll('input[type="text"');
-    var textareas = form.querySelectorAll('textarea');
-    var todoJson = {
-        id: todoList.length,
-        name: inputs[0].value,
-        status: "TODO",
-        text: textareas[0].value,
-        email: inputs[1].value,
-        dateTime: (() => {
-            var curr = new Date().toISOString().split('T');
-            return curr[0] + ' ' + curr[1].substring(0, 8);
-        })()
-    };
+function insertAction(todoJson) {
+    addCard(todoJson);
+    todoList.push(todoJson);
+    reportSuccess({
+        title: "Inserting a TODO",
+        text: "The TODO was successfully created"
+    });
+}
 
-    // addTODO
-    return false;
-};
+function updateAction(todoId) {
+    reportSuccess({
+        title: "Updated a TODO",
+        text: "The TODO with the id:" + todoId + " was successfully updated"
+    });
+}
+
+function deleteAction(todoId) {
+    let deletedIdx = todoList.findIndex((elem) => {
+        return elem.id == todoId
+    });
+    todoList.splice(deletedIdx, 1);
+
+    reportSuccess({
+        title: "Deleted a TODO",
+        text: "Deleted the TODO with id:" + todoId
+    });
+}
+
+function clearAllAction() {
+    clearAllCards();
+    reportSuccess({
+        title: "Deleted all TODOs",
+        text: "All TODOs were successfully deleted"
+    });
+}
+
+function closeAction() {
+    wworker.terminate(); // Terminates the worker
+    createToast({
+        title: "Web Worker terminated",
+        text: "The Web Worker was terminated. It's not working anymore Scotty!!",
+        type: vtType.info,
+        timeout: vtTimeout,
+        callback: vtCallback
+    });
+}
