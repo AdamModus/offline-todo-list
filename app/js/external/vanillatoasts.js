@@ -1,16 +1,16 @@
-(function(root, factory) {
+(function (root, factory) {
   try {
     // commonjs
     if (typeof exports === 'object') {
       module.exports = factory();
-    // global
+      // global
     } else {
       root.VanillaToasts = factory();
     }
-  } catch(error) {
+  } catch (error) {
     console.log('Isomorphic compatibility is not supported at this time for VanillaToasts.')
   }
-})(this, function() {
+})(this, function () {
 
   // We need DOM to be ready
   if (document.readyState === 'complete') {
@@ -22,7 +22,7 @@
   // Create VanillaToasts object
   VanillaToasts = {
     // In case toast creation is attempted before dom has finished loading!
-    create: function() {
+    create: function () {
       console.error([
         'DOM has not finished loading.',
         '\tInvoke create method when DOM\s readyState is complete'
@@ -40,7 +40,7 @@
 
     // @Override
     // Replace create method when DOM has finished loading
-    VanillaToasts.create = function(options) {
+    VanillaToasts.create = function (options) {
       var toast = document.createElement('div');
       toast.id = ++autoincrement;
       toast.id = 'toast-' + toast.id;
@@ -76,7 +76,7 @@
       }
 
       // toast api
-      toast.hide = function() {
+      toast.hide = function () {
         toast.className += ' vanillatoasts-fadeOut';
         toast.addEventListener('animationend', removeToast, false);
       };
