@@ -2,21 +2,21 @@
 
 // If all the files are successfully cached, then the service worker is installed.
 self.addEventListener('install', function (event) {
-    // Perform install steps
-    console.log('Service worker was installed!');
+  // Perform install steps
+  console.log('Service worker was installed!');
 });
 
 // After the service worker is installed, it is then activated, meaning it can start controlling what the user gets!
 self.addEventListener('activate', function (event) {
-    console.log(`You're good to go!`);
+  console.log(`You're good to go!`);
 });
 
 
 self.addEventListener('fetch', function (event) {
-    console.log("Intercepted a fetch: " + event.request);    // Hello World!
-    event.respondWith(new Response(helloWorldResponse, {
-        headers: {'Content-Type': 'text/html'}
-    }));
+  console.log("Intercepted a fetch: " + event.request);    // Hello World!
+  event.respondWith(new Response(helloWorldResponse, {
+    headers: {'Content-Type': 'text/html'}
+  }));
 });
 
 
@@ -28,37 +28,36 @@ var helloWorldResponse = `
 <style>
   /* any custom styles live here */
   line {
-  stroke-width: 3px;
-  stroke: black;
+    stroke-width: 3px;
+    stroke: black;
   }      
 </style>
 <article>
-    <div>
-      <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" >
-        <g>
-          <circle id="circle" style="stroke: black; fill: #f8f8f8;" cx="100" cy="100" r="100"/>
-          <line id="hour0" x1="100" y1="10"  x2="100" y2="0"/>
-          <line id="hour1" x1="150" y1="13"  x2="145" y2="22"/>
-          <line id="hour2" x1="187" y1="50"  x2="178" y2="55"/>
-          <line id="hour3" x1="190" y1="100" x2="200" y2="100"/>
-          <line id="hour4" x1="187" y1="150" x2="178" y2="145"/>
-          <line id="hour5" x1="150" y1="187" x2="145" y2="178"/>
-          <line id="hour6" x1="100" y1="190" x2="100" y2="200"/>
-          <line id="hour7" x1="50"  y1="187" x2="55"  y2="178"/>
-          <line id="hour8" x1="13"  y1="150" x2="22"  y2="145"/>
-          <line id="hour9" x1="0"   y1="100" x2="10"  y2="100"/>
-          <line id="hour10" x1="13"  y1="50"  x2="22"  y2="55" />
-          <line id="hour11" x1="50"  y1="13"  x2="55"  y2="22" />
-        </g>
-        <g>
-          <line x1="100" y1="100" x2="100" y2="45" style="stroke-width: 6px; stroke: green;" id="hourhand"/>
-          <line x1="100" y1="100" x2="100" y2="15" style="stroke-width: 4px; stroke: blue;"  id="minutehand"/>
-          <line x1="100" y1="100" x2="100" y2="5"  style="stroke-width: 2px; stroke: red;"   id="secondhand"/>
-        </g>
-      </svg>
-    </div>
-    <h2 id="timeText" style="padding-left: 100px;"></h2>
-
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" >
+      <g>
+        <circle id="circle" style="stroke: black; fill: #f8f8f8;" cx="100" cy="100" r="100"/>
+        <line id="hour0" x1="100" y1="10"  x2="100" y2="0"/>
+        <line id="hour1" x1="150" y1="13"  x2="145" y2="22"/>
+        <line id="hour2" x1="187" y1="50"  x2="178" y2="55"/>
+        <line id="hour3" x1="190" y1="100" x2="200" y2="100"/>
+        <line id="hour4" x1="187" y1="150" x2="178" y2="145"/>
+        <line id="hour5" x1="150" y1="187" x2="145" y2="178"/>
+        <line id="hour6" x1="100" y1="190" x2="100" y2="200"/>
+        <line id="hour7" x1="50"  y1="187" x2="55"  y2="178"/>
+        <line id="hour8" x1="13"  y1="150" x2="22"  y2="145"/>
+        <line id="hour9" x1="0"   y1="100" x2="10"  y2="100"/>
+        <line id="hour10" x1="13"  y1="50"  x2="22"  y2="55" />
+        <line id="hour11" x1="50"  y1="13"  x2="55"  y2="22" />
+      </g>
+      <g>
+        <line x1="100" y1="100" x2="100" y2="45" style="stroke-width: 6px; stroke: green;" id="hourhand"/>
+        <line x1="100" y1="100" x2="100" y2="15" style="stroke-width: 4px; stroke: blue;"  id="minutehand"/>
+        <line x1="100" y1="100" x2="100" y2="5"  style="stroke-width: 2px; stroke: red;"   id="secondhand"/>
+      </g>
+    </svg>
+  </div>
+  <h2 id="timeText" style="padding-left: 100px;"></h2>
 </article>
 <script>
 var CLOCK = (function() {

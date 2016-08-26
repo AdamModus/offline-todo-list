@@ -1,13 +1,13 @@
 /*
     Main CSS
 */
-h1{
+h1 {
     color: #585858;
     font-size: 2rem;
     margin-top: 8px;
 }
 
-header{
+header {
     text-align: center;
     height: 88px;
     background-color: #F7F7F7;
@@ -16,18 +16,18 @@ header{
     background-position: center;
 }
 
-.surviving-offline{
+.surviving-offline {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
 }
 
-.offline-body{
+.offline-body {
     display: flex;
     flex: 1;
 }
 
-.offline-nav{
+.offline-nav {
     color: #F7F7F7;
     background-color: #585858;
     order: 0;
@@ -36,7 +36,8 @@ header{
     max-width: 16em;
     padding: 8px;
 }
-.offline-nav.create-todo-form{
+
+.offline-nav.create-todo-form {
     width: 100%;
     max-width: 16em;
 }
@@ -47,13 +48,18 @@ header{
 
 .create-todo-form textarea {
     width: 100%;
-    resize:vertical ;
+    resize: vertical;
 }
 
-.offline-content{
+.offline-content {
     height: calc(100vh - 88px);
     order: 1;
     flex: 1;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.card-container.fade-out {
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
 }
