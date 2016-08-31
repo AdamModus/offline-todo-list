@@ -36,6 +36,12 @@ class Cards {
     this.addEventListeners();
 
     requestAnimationFrame(this.update);
+
+    // checking for changes in the DOM (e.g. cards are added or removed)
+    new MutationObserver(this.refreshCardsOnMutation.bind(this)).observe(document.body, {
+      subtree: true,
+      childList: true
+    });
   }
 
   addEventListeners() {
@@ -46,22 +52,6 @@ class Cards {
     document.addEventListener('mousedown', this.onStart);
     document.addEventListener('mousemove', this.onMove);
     document.addEventListener('mouseup', this.onEnd);
-  }
-
-  removeEventListeners() {
-    document.removeEventListener('touchstart', this.onStart);
-    document.removeEventListener('touchmove', this.onMove);
-    document.removeEventListener('touchend', this.onEnd);
-
-    document.removeEventListener('mousedown', this.onStart);
-    document.removeEventListener('mousemove', this.onMove);
-    document.removeEventListener('mouseup', this.onEnd);
-  }
-
-  refreshCards() {
-    this.removeEventListeners();
-    this.cards = Array.from(document.querySelectorAll('.card'));
-    this.addEventListeners();
   }
 
   onStart(evt) {
@@ -202,4 +192,21 @@ class Cards {
     this.target.style.transform = 'none';
     this.target = null;
   }
+
+  refreshCardsOnMutation(mutations) {
+    let addedCardEvent = false;
+    for (let i = 0; i < mutations.length; i++) {
+      let mutation = mutations[i];
+      if (mutation.addedNodes.length > 0
+        && mutation.addedNodes[0].nodeType === 1
+        && mutation.addedNodes[0].classList.contains('card')) {
+        addedCardEvent = true;
+        console.log('captured an added card event!!');
+      }
+    }
+    if (addedCardEvent) {
+      this.cards = Array.from(document.querySelectorAll('.card'));
+    }
+  }
+
 }

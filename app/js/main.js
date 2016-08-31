@@ -100,10 +100,6 @@ function initCards() {
   }
 }
 
-function refreshCards() {
-  cardsClass.refreshCards();
-}
-
 ///////////////////////////////////////////////////////
 ////////////// Actions ////////////////
 ///////////////////////////////////////////////////////
@@ -128,7 +124,6 @@ function getAction(todoId) {
 function insertAction(todoJson) {
   addCard(todoJson);
   todoList.push(todoJson);
-  refreshCards();
   reportSuccess({
     title: "Inserting a TODO",
     text: "The TODO was successfully created"

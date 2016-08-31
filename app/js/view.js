@@ -64,7 +64,7 @@ document.getElementById("createTODO").onsubmit = function (evt) {
   var inputs = form.querySelectorAll('input[type="text"');
   var textAreas = form.querySelectorAll('textarea');
   var todoJson = {
-    id: todoList[todoList.length - 1].id + 1,
+    id: todoList.length > 0 ? todoList[todoList.length - 1].id + 1 : 0,
     name: inputs[0].value,
     status: "TODO",
     text: textAreas[0].value,
