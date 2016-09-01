@@ -1,4 +1,7 @@
+'use strict';
+
 function generateCardHTML(todoJson) {
+  /*
   var elem = document.createElement('div');
   elem.className = "card";
   elem.innerHTML = `
@@ -11,7 +14,16 @@ function generateCardHTML(todoJson) {
                             <li>DATETIME: ${todoJson.dateTime}</li>
                         </ul>
                     `;
-  return elem;
+  */
+
+  let newCard = new ToDoCardElement();
+  newCard.className = "card";
+  newCard.setAttribute('identifier', todoJson.id);
+  newCard.setAttribute('text', todoJson.text);
+  newCard.setAttribute('header', todoJson.name);
+  newCard.setAttribute('footer', todoJson.email);
+
+  return newCard;
 }
 
 function listCards(todos) {

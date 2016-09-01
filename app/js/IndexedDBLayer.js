@@ -1,3 +1,5 @@
+"use strict";
+
 let IndexedDBLayer = (function () {
   const db = Symbol('db'); // Database reference
   const storeName = Symbol('storeName'); // database name

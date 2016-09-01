@@ -7,6 +7,7 @@ var urlsToCache = [
   'js/main.js',
   'js/view.js',
   'js/IndexedDBLayer.js',
+  'js/ToDoCard.js',
   'js/TodoListDB.js',
   'js/setDefaultTODOs.js',
   'js/external/cards.js',

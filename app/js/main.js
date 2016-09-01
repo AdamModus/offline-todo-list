@@ -1,3 +1,5 @@
+"use strict";
+
 const vtTimeout = 3000;
 const vtCallback = Function.prototype;
 const vtType = {
@@ -92,7 +94,7 @@ function reportSuccess(params) {
 function initCards() {
   cardsClass = new Cards();
   cardsClass.onCardDelete = function (elem) {
-    let id = elem.firstElementChild.firstElementChild.innerHTML.substring(4);
+    let id = elem.getAttribute('identifier');
     wworker.postMessage({
       cmd: wwCommands.delete,
       val: parseInt(id)

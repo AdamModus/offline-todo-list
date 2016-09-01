@@ -20,6 +20,7 @@
 class Cards {
   constructor() {
     this.cards = Array.from(document.querySelectorAll('.card'));
+    // this.cards = Array.from(document.getElementsByTagName('to-do-card'));
 
     this.onStart = this.onStart.bind(this);
     this.onMove = this.onMove.bind(this);
@@ -58,6 +59,7 @@ class Cards {
     if (this.target)
       return;
 
+    // if (evt.target.tagName.toString() !== 'TO-DO-CARD')
     if (!evt.target.classList.contains('card'))
       return;
 

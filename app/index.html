@@ -4,26 +4,65 @@
     <meta charset="UTF-8"/>
     <title>Surviving to the offline status</title>
     <link rel="shortcut icon" sizes="16x16 32x32 48x48 57x57 64x64 114x114 120x120 144x144 152x152" href="favicon.ico?v=1.0">
+
+    <!-- Check Service Workers support-->
+    <script>
+        if ('serviceWorker' in navigator) {
+            console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'detected support on your browser, awesome!');
+            navigator.serviceWorker.register('sw.js', {scope: './'}).then(function (registration) {
+                // Registration was successful! :)
+                console.log('%c Service workers: ', 'color:black; background-color: #FFD700', '1. registered with scope:', registration.scope, ' Installing...');
+            }).catch(function (err) {
+                // Registration failed :(
+                console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'ServiceWorker registration failed: ', err);
+            });
+        }
+    </script>
+
+    <!-- Template for the to-do-card -->
+    <template id="to-do-card-template">
+        <!-- CSS -->
+        <style>
+            figure.to-do-card {
+                display: flex;
+                width: auto;
+                min-height: 120px;
+                font-size: 14px;
+                padding: 1rem;
+                margin: 20px 0;
+                position: relative;
+                flex-direction: column;
+                background-size: contain;
+                border-radius: 3px;
+                box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+                cursor: pointer;
+            }
+
+            figure h1.header{
+                margin: 0;
+                font-size: 18px;
+            }
+
+            p.text {
+                flex-grow: 1;
+            }
+
+            span.identifier {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+        </style>
+
+        <!-- HTML -->
+        <figure class="to-do-card">
+            <h1 class="header"></h1>
+            <p class="text"></p>
+            <footer class="footer"></footer>
+            <span class="identifier"></span>
+        </figure>
+    </template>
 </head>
-<script>
-    if ('serviceWorker' in navigator) {
-        console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'detected support on your browser, awesome!');
-        // this is the default scope value when registering a service worker
-        // ServiceWorkerRegistration.unregister('sw.js').then(function (registration) {});
-        // navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        //     for (let registration of registrations) {
-        //        registration.unregister();
-        //     }
-        // });
-        navigator.serviceWorker.register('sw.js', {scope: './'}).then(function (registration) {
-            // Registration was successful! :)
-            console.log('%c Service workers: ', 'color:black; background-color: #FFD700', '1. registered with scope:', registration.scope, ' Installing...');
-        }).catch(function (err) {
-            // Registration failed :(
-            console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'ServiceWorker registration failed: ', err);
-        });
-    }
-</script>
 <body class="surviving-offline">
 <header>
     <h1>Surviving to the offline status</h1>
@@ -56,6 +95,7 @@
 <link rel="stylesheet" type="text/css" href="style/external/vanillatoasts.css">
 <script src="js/external/cards.js"></script>
 <script src="js/external/vanillatoasts.js"></script>
+<script src="js/ToDoCard.js"></script>
 <script src="js/view.js"></script>
 <script src="js/main.js"></script>
 <script src="js/setDefaultTODOs.js"></script>
