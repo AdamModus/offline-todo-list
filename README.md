@@ -8,7 +8,7 @@ Feel free to copy or use anything you like in here for learning or experimenting
 * Service Workers.
 * IndexedDB.
 * Web Workers.
-* Web components.
+* Custom Elements.
 * Shadow DOM.
 * HTML template.
 

@@ -1,26 +1,26 @@
 /**
- * Web component ToDoCard.
+ * Custom element ToDoCard.
  *
- * This web component encapsulates all the layout and style to display a ToDoCard.
+ * This custom element encapsulates all the layout and style to display a ToDoCard.
  *
- * The consumer of this web component is able to create a ToDoCard with the following HTML tag:
+ * The consumer of this custom element is able to create a ToDoCard with the following HTML tag:
  * <to-do-card></to-do-card>
  *
- * This web component includes the following optional attributes:
+ * This custom element includes the following optional attributes:
  * - identifier
  * - header
  * - text
  * - footer
  *
  * The attribute values can be specified within the attributes of the HTML tag:
- *  <to-do-card identifier="0" header="Title" text="Testing web components." footer="mail@test.com"></to-do-card>
+ *  <to-do-card identifier="0" header="Title" text="Testing custom elements." footer="mail@test.com"></to-do-card>
  *
  * and also using JavaScript:
  *  let toDoCard = new ToDoCardElement();
  *  toDoCard.className = "card";
  *  toDoCard.setAttribute('identifier', '0');
  *  toDoCard.setAttribute('text', 'Title');
- *  toDoCard.setAttribute('header', 'Testing web components.');
+ *  toDoCard.setAttribute('header', 'Testing custom elements.');
  *  toDoCard.setAttribute('footer', 'mail@test.com');
  *
  * @extends HTMLElement
@@ -56,33 +56,43 @@ class ToDoCard extends HTMLElement {
    * Updates the content of the render with the values of the attributes.
    */
   renderTemplate(){
-    // Check if the card attributes contain values and update the template.
-    this.identifierNode.textContent = typeof this.attributes.identifier === 'object'? `#${this.attributes.identifier.value}` : '';
-    this.headerNode.textContent = typeof this.attributes.header === 'object'? this.attributes.header.value : '';
-    this.textNode.textContent = typeof this.attributes.text === 'object'? this.attributes.text.value : '';
-    this.footerNode.textContent = typeof this.attributes.footer === 'object'? this.attributes.footer.value : '';
+    // Ensure the template has been created.
+    if (this.templateCreated === true) {
+      // Check if the card attributes contain values and update the template.
+      this.identifierNode.textContent = typeof this.attributes.identifier === 'object' ? `#${this.attributes.identifier.value}` : '';
+      this.headerNode.textContent = typeof this.attributes.header === 'object' ? this.attributes.header.value : '';
+      this.textNode.textContent = typeof this.attributes.text === 'object' ? this.attributes.text.value : '';
+      this.footerNode.textContent = typeof this.attributes.footer === 'object' ? this.attributes.footer.value : '';
+    }
   }
   /**
-   * Lifecycle callback of any web component.
+   * Part of any Custom Element reactions.
+   *
    * Executed when an instance was inserted into the document.
+   * Useful for running setup code, such as fetching resources or rendering.
+   * Generally, you should try to delay work until this time.
+   *
+   * TODO rename this method to connectedCallback when the spec change is implemented in the major browsers:
+   * https://github.com/webcomponents/webcomponentsjs/issues/598
    */
   attachedCallback(){
     this.initTemplate();
     this.renderTemplate();
   };
   /**
-   * Lifecycle callback of any web component.
-   * Executed when an attribute was added, removed, or updated.
+   * Part of any Custom Element reactions.
+   *
+   * Executed when an attribute was added, removed, updated, or replaced.
+   * Also called for initial values when an element is created by the parser, or upgraded.
+   * Note: only attributes listed in the observedAttributes property will receive this callback.
    */
   attributeChangedCallback(attrName, oldVal, newVal){
-    // The order of the lifecycle callbacks is not defined or guaranteed so the existence of the template must be verified.
-    if (this.templateCreated === true){
-      this.renderTemplate();
-    }
+    this.renderTemplate();
   }
 
   /**
-   * Lifecycle callback of any web component.
+   * Part of any Custom Element reactions.
+   *
    * Executed when an instance of the element is created.
    */
   createdCallback(){
@@ -90,7 +100,11 @@ class ToDoCard extends HTMLElement {
   }
 
   /**
-   * Simply call the parent constructor
+   * Part of any Custom Element reactions.
+   *
+   * Executed when an instance of the element is created or upgraded.
+   * See the spec for restrictions on what you can do in the constructor:
+   * https://html.spec.whatwg.org/multipage/scripting.html#custom-element-conformance
    */
   constructor(){
     super();
