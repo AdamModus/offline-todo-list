@@ -51,6 +51,10 @@ header {
     resize: vertical;
 }
 
+.offline-nav button {
+    width: 100%;
+}
+
 .offline-content {
     height: calc(100vh - 88px);
     order: 1;
