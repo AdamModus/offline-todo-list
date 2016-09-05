@@ -62,9 +62,9 @@ class Cards {
     // Capture the clicked to-do-card.
     let clickedCard = evt.target;
     // Loop through the parents of the clicked element until a to-do-card element or the document body is found.
-    while (clickedCard.tagName.toString() !== 'TO-DO-CARD'){
+    while (clickedCard.tagName.toString() !== 'TO-DO-CARD') {
       clickedCard = clickedCard.parentNode;
-      if (clickedCard.tagName.toString() === 'BODY'){
+      if (clickedCard.tagName.toString() === 'BODY') {
         // The user didn't click on a to-do-card, stop the execution.
         return;
       }
@@ -86,7 +86,7 @@ class Cards {
     if (!this.target)
       return;
 
-    this.currentX = evt.pageX || evt.touches[0].pageX;
+    this.currentX = evt.pageX || (evt.touches ? evt.touches[0].pageX : 0);
   }
 
   onEnd(evt) {
