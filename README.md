@@ -7,10 +7,13 @@ Feel free to copy or use anything you like in here for learning or experimenting
 # Technologies explored so far:
 * Service Workers.
 * IndexedDB.
+* Web Workers.
+* Custom Elements.
+* Shadow DOM.
+* HTML template.
 
 # Setup
 * Install node
-* Run npm install
-* Install gulp globally
-* Run gulp
-* Have fun!
+* cd node_server
+* npm install
+* node server.js (by default running on port 8888, you can specify the port with -p or -port)

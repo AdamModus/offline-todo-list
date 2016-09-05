@@ -20,6 +20,7 @@
 class Cards {
   constructor() {
     this.cards = Array.from(document.querySelectorAll('.card'));
+    // this.cards = Array.from(document.getElementsByTagName('to-do-card'));
 
     this.onStart = this.onStart.bind(this);
     this.onMove = this.onMove.bind(this);
@@ -58,10 +59,18 @@ class Cards {
     if (this.target)
       return;
 
-    if (!evt.target.classList.contains('card'))
-      return;
+    // Capture the clicked to-do-card.
+    let clickedCard = evt.target;
+    // Loop through the parents of the clicked element until a to-do-card element or the document body is found.
+    while (clickedCard.tagName.toString() !== 'TO-DO-CARD') {
+      clickedCard = clickedCard.parentNode;
+      if (clickedCard.tagName.toString() === 'BODY') {
+        // The user didn't click on a to-do-card, stop the execution.
+        return;
+      }
+    }
 
-    this.target = evt.target;
+    this.target = clickedCard;
     this.targetBCR = this.target.getBoundingClientRect();
 
     this.startX = evt.pageX || evt.touches[0].pageX;
@@ -77,7 +86,7 @@ class Cards {
     if (!this.target)
       return;
 
-    this.currentX = evt.pageX || evt.touches[0].pageX;
+    this.currentX = evt.pageX || (evt.touches ? evt.touches[0].pageX : 0);
   }
 
   onEnd(evt) {

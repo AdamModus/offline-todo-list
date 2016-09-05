@@ -1,3 +1,5 @@
+"use strict";
+
 let TodoListDB = (function () {
   const dbVersion = 2;
   // const schema = {
