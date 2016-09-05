@@ -16,4 +16,4 @@ Feel free to copy or use anything you like in here for learning or experimenting
 * Install node
 * cd node_server
 * npm install
-* node serve (by default running on port 8888, you can specify the port with -p or -port)
+* node server.js (by default running on port 8888, you can specify the port with -p or -port)
