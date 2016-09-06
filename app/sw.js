@@ -2,6 +2,7 @@
 
 // What should I cache?
 var urlsToCache = [
+  '/',
   'index.html',
   // js assets
   'js/main.js',
