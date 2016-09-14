@@ -26,7 +26,7 @@ class SurvivingOfflineServer {
       }
     );
     // Define the port argument
-    this.argParser.addArgument(['-p', '--port'],{
+    this.argParser.addArgument(['-p', '--port'], {
       help: 'Port on where to run the server.',
       type: 'int',
       defaultValue: '8888'
@@ -40,12 +40,12 @@ class SurvivingOfflineServer {
    * - Log the requests in the terminal.
    * - Serve the static files located in "../app"
    */
-  createApp(){
+  createApp() {
     // Create a new express app
     this.app = express();
     // Log the requests
     this.app.use(function logger(req, res, next) {
-      console.log('serving '+req.url);
+      console.log('serving ' + req.url);
       next(); // Passing the request to the next handler in the stack.
     });
     // Configure the static files
@@ -55,14 +55,14 @@ class SurvivingOfflineServer {
   /**
    * Starts a http server in the port specified in the arguments or 8888
    */
-  startServing(){
+  startServing() {
     let serverPort = this.arguments.port;
     // Listen on the current port
-    this.app.listen(serverPort, function(){
+    this.app.listen(serverPort, function () {
       console.log('Server listening on port: ', serverPort);
     })
   }
-  
+
   constructor() {
     this.initArgumentParser();
     this.createApp();
