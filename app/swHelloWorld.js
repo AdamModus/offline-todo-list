@@ -28,7 +28,7 @@ var helloWorldResponse = `
   <h2 style="font-size: 48px;">Internet connection ?</h2>
   <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-     x="0px" y="0px" width="760px" height="450px" viewBox="30 110 760 450" enable-background="new 0 0 760 450" xml:space="preserve">
+     x="0px" y="0px" width="100%" viewBox="30 110 760 450" enable-background="new 0 0 760 450" xml:space="preserve">
     <g>
       <path fill-rule="evenodd" clip-rule="evenodd" fill="#3C2415" d="M32.025,492.549c3.846-1.537,7.755-2.937,11.528-4.637
         c18.19-8.192,36.088-10.493,55.518-2.448c22.92,9.491,44.466-0.013,64.408-10.396c4.712-2.454,4.912-13.578,7.643-22.146
