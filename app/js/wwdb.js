@@ -1,7 +1,7 @@
 "use strict";
 
-const logTextColor = "#33cc33";
-const logBackgroundColor = "#000";
+const logTextColor = "#000";
+const logBackgroundColor = "#33cc33";
 
 try {
   importScripts("IndexedDBLayer.js", "TodoListDB.js");
