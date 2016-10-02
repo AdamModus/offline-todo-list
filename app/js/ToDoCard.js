@@ -111,5 +111,8 @@ class ToDoCard extends HTMLElement {
   }
 }
 
-// Register our component and make it available on the global scope
-let ToDoCardElement = document.registerElement("to-do-card", ToDoCard);
+// Feature detection
+if (typeof document.registerElement === 'function') {
+  // Register our component and make it available on the global scope
+  window.ToDoCardElement = document.registerElement("to-do-card", ToDoCard);
+}
