@@ -7,7 +7,13 @@
 
     <!-- Check Service Workers support-->
     <script>
-        if ('serviceWorker' in navigator) {
+        /**
+         * Different versions of Chrome support different caching methods, this complicates a bit the feature detection.
+         * The support of ServiceWorkers and the addAll method should be checked.
+         *
+         * https://developer.mozilla.org/en-US/docs/Web/API/Cache
+         */
+        if ( 'serviceWorker' in navigator && (typeof Cache !== 'undefined' && Cache.prototype.addAll) ) {
             console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'detected support on your browser, awesome!');
             navigator.serviceWorker.register('sw.js', {scope: './'}).then(function (registration) {
                 // Registration was successful! :)
