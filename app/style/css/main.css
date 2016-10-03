@@ -16,6 +16,22 @@ header {
     background-position: center;
 }
 
+.side-nav-switch {
+    height: 88px;
+    width: 88px;
+    position: absolute;
+    left: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: url(../../imgs/hamburger.svg) center / 50% no-repeat;
+    transition: 0.5s ease-in-out;
+}
+
+.side-nav-switch.open {
+    background-image: url(../../imgs/close.svg);
+}
+
 .surviving-offline {
     display: flex;
     min-height: 100vh;
@@ -24,22 +40,31 @@ header {
 
 .offline-body {
     display: flex;
-    flex: 1;
 }
 
 .offline-nav {
     color: #F7F7F7;
     background-color: #585858;
-    order: 0;
-    /* 16em is the width of the columns */
-    flex: 0 0 16em;
-    max-width: 16em;
-    padding: 8px;
+    overflow: hidden;
+    width: 0px;
+    transition: 0.5s ease-in-out;
+    position: absolute;
+    z-index: 1;
+    will-change: transform;
+    height: 100%;
 }
 
-.offline-nav.create-todo-form {
-    width: 100%;
-    max-width: 16em;
+.offline-nav.open {
+    width: 30%;
+}
+
+.offline-nav * {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.create-todo-form {
+    padding: 8px;
 }
 
 .create-todo-form input {
@@ -52,12 +77,12 @@ header {
 }
 
 .offline-nav button {
-    width: 100%;
+    width: calc(100% - 16px);
+    margin: 8px;
 }
 
 .offline-content {
     height: calc(100vh - 88px);
-    order: 1;
     flex: 1;
     overflow-y: scroll;
     overflow-x: hidden;

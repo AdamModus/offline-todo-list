@@ -20,11 +20,10 @@ var urlsToCache = [
   'style/vendor/cards.css',
   'style/vendor/vanillatoasts.css',
   // img assets
-  'imgs/offline-rex.jpg',
-  // icons
   'imgs/icon/favicon-96x96.png',
   'imgs/icon/favicon-144x144.png',
   'imgs/icon/favicon-196x196.png'
+  'imgs/hamburger.svg'
 ];
 
 // used for logging
