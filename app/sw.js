@@ -16,8 +16,8 @@ var urlsToCache = [
   'js/util/setDefaultTODOs.js',
   // css assets
   'style/css/main.css',
-  'style/external/cards.css',
-  'style/external/vanillatoasts.css',
+  'style/vendor/cards.css',
+  'style/vendor/vanillatoasts.css',
   // img assets
   'imgs/offline-rex.jpg'
 ];
