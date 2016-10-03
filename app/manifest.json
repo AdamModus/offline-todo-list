@@ -1,0 +1,25 @@
+{
+  "short_name": "Offline survivor",
+  "name": "Surviving the offline status",
+  "description": "A simply progressive web app.",
+  "background-color": "#FAFAFA",
+  "icons": [
+    {
+      "src": "imgs/icon/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "imgs/icon/favicon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "imgs/icon/favicon-196x196.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone"
+}

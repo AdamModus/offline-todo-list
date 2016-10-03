@@ -4,6 +4,7 @@
 var urlsToCache = [
   '/',
   'index.html',
+  'manifest.json',
   // js assets
   'js/main.js',
   'js/view.js',
@@ -19,7 +20,11 @@ var urlsToCache = [
   'style/vendor/cards.css',
   'style/vendor/vanillatoasts.css',
   // img assets
-  'imgs/offline-rex.jpg'
+  'imgs/offline-rex.jpg',
+  // icons
+  'imgs/icon/favicon-96x96.png',
+  'imgs/icon/favicon-144x144.png',
+  'imgs/icon/favicon-196x196.png'
 ];
 
 // used for logging
