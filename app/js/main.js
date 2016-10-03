@@ -19,7 +19,7 @@ const wwCommands = {
 
 var todoList = [];
 var cardsClass;
-var wworker = new Worker('js/wwdb.js');
+var wworker = new Worker('js/web-workers/db.js');
 
 wworker.onmessage = function (e) {
   var data = e.data;
