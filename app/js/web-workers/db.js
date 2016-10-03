@@ -4,7 +4,7 @@ const logTextColor = "#000";
 const logBackgroundColor = "#33cc33";
 
 try {
-  importScripts("../indexedDB/IndexedDBLayer.js", "../indexedDB/TodoListDB.js");
+  self.importScripts("../indexedDB/IndexedDBLayer.js", "../indexedDB/TodoListDB.js");
   console.log("%c WebWorker: ", "color: " + logTextColor + "; background-color: " + logBackgroundColor, "IndexedDB related scripts were imported successfully");
 } catch (err) {
   console.log("%c WebWorker: ", "color: " + logTextColor + "; background-color: " + logBackgroundColor, "IndexedDB related scripts were imported successfully");
