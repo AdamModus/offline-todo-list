@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width" />
     <link rel="manifest" href="manifest.json">
     <title>Surviving the offline status</title>
     <link rel="shortcut icon" sizes="16x16 32x32 48x48 57x57 64x64 114x114 120x120 144x144 152x152" href="favicon.ico?v=1.0">
@@ -34,7 +35,7 @@
                 display: flex;
                 width: auto;
                 min-height: 120px;
-                font-size: 14px;
+                font-size: 1.3rem;
                 padding: 1rem;
                 margin: 20px 0;
                 position: relative;
@@ -47,7 +48,7 @@
 
             figure h1.header{
                 margin: 0;
-                font-size: 18px;
+                font-size: 2rem;
                 max-width: 90%;
             }
 
@@ -62,6 +63,10 @@
             }
             footer.footer{
                 word-break: break-all;
+            }
+
+            @media (max-width: 800px) {
+
             }
         </style>
 
@@ -89,10 +94,10 @@
             <textarea rows="8" name="text" form="createTODO"></textarea><br/><br/>
             E-mail:<br/>
             <input type="text" name="email"><br/><br/>
-            <input type="submit" value="Create TODO">
+            <input type="submit" class="offline-button" value="Create TODO">
         </form>
         <hr>
-        <button id="CleanDB">Clear Database</button>
+        <button id="CleanDB" class="offline-button">Clear Database</button>
     </nav>
     <main class="offline-content">
         <div class="card-container">
@@ -103,7 +108,6 @@
 
 
 <link rel="stylesheet" type="text/css" href="style/css/main.css">
-<link rel="stylesheet" type="text/css" href="style/vendor/cards.css">
 <link rel="stylesheet" type="text/css" href="style/vendor/vanillatoasts.css">
 <script src="js/vendor/cards.js"></script>
 <script src="js/vendor/vanillatoasts.js"></script>
