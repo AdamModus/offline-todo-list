@@ -138,6 +138,10 @@ header {
         height: calc(100% - 135px + 3rem);
     }
 
+    .offline-content {
+        height: calc(100vh - 135px);
+    }
+
     .side-nav-switch {
         left: 0;
         top: 0;
