@@ -76,7 +76,7 @@ let TodoListDB = (function () {
           // finished before adding data into it.
           todoStore.transaction.oncomplete = function (event) {
             console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Transaction complete.');
-            self[idbLayer] = new IndexedDBLayer(event.target.result, self[storeName]);
+            self[idbLayer] = new IndexedDBLayer(db, self[storeName]);
             resolve();
           };
         };

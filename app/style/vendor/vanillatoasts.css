@@ -10,10 +10,10 @@
     position: relative;
     padding: 20px 17px;
     margin: 20px;
-    border-radius: 10px;
+    border-radius: 3px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
     background: #F5F5F5;
     cursor: pointer;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     animation-duration: .3s;
     animation-name: VanillaToasts;
     animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);

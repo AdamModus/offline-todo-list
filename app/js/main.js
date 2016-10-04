@@ -1,6 +1,6 @@
 "use strict";
 
-const vtTimeout = 300000;
+const vtTimeout = 1 * 1000;
 const vtCallback = Function.prototype;
 const vtType = {
   error: "error",
