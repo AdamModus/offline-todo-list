@@ -210,7 +210,6 @@ class Cards {
         && mutation.addedNodes[0].nodeType === 1
         && mutation.addedNodes[0].classList.contains('card')) {
         addedCardEvent = true;
-        console.log('captured an added card event!!');
       }
     }
     if (addedCardEvent) {
