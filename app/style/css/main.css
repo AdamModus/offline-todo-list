@@ -153,4 +153,8 @@ header {
         line-height: 0.8rem;
         font-size: 0.8rem;
     }
+
+    .create-todo-form textarea {
+        height: 50px;
+    }
 }
