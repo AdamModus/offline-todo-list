@@ -83,23 +83,38 @@ document.getElementById("createTODO").onsubmit = function (evt) {
 };
 
 document.getElementById("sideNavSwitch").onclick = function (evt) {
-    toggleNav();
+    var nav = document.getElementsByClassName('offline-nav')[0];
+    nav.classList.toggle('open');
     evt.stopPropagation();
-    window.removeEventListener('click', windowClickHandler, false);
-    if (document.getElementById("sideNavSwitch").classList.contains('open')) {
-        window.addEventListener('click', windowClickHandler, false);
+
+    window.removeEventListener('click', closeFormHandler, false);
+    window.removeEventListener('keydown', closeFormHandler, false);
+
+    if (nav.classList.contains('open')) {
+        window.addEventListener('click', closeFormHandler, false);
+        window.addEventListener('keydown', closeFormHandler, false);
     }
 };
 
-function windowClickHandler(evt) {
+function closeFormHandler(evt) {
     var nav = document.getElementsByClassName('offline-nav')[0];
-    if (!nav.contains(evt.target)) {
-        window.removeEventListener('click', windowClickHandler, false);
-        toggleNav();
-    }
-}
 
-function toggleNav() {
-    document.getElementById("sideNavSwitch").classList.toggle('open');
-    document.getElementsByClassName('offline-nav')[0].classList.toggle('open');
+    switch (evt.type) {
+        case 'click':
+            if (!nav.contains(evt.target)) {
+                window.removeEventListener('click', closeFormHandler, false);
+                window.removeEventListener('keydown', closeFormHandler, false);
+                document.getElementsByClassName('offline-nav')[0].classList.toggle('open');
+            }
+            break;
+        case 'keydown':
+            if (evt.keyCode == 27) { // escape key maps to keycode `27`
+                window.removeEventListener('click', closeFormHandler, false);
+                window.removeEventListener('keydown', closeFormHandler, false);
+                document.getElementsByClassName('offline-nav')[0].classList.toggle('open');
+            }
+            break;
+        default:
+            break;
+    }
 }
