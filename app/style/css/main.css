@@ -28,16 +28,12 @@ header {
     width: 40px;
     position: absolute;
     left: 20px;
-    top: calc(88px + 2rem + 20px);
+    top: calc(88px + 20px);
     border: none;
     outline: none;
     cursor: pointer;
     background: url(../../imgs/plus.svg) center / 100% no-repeat;
     transition: 0.5s ease-in-out;
-}
-
-.side-nav-switch.open {
-    background-image: url(../../imgs/close.svg);
 }
 
 .surviving-offline {
@@ -54,17 +50,18 @@ header {
     color: #F7F7F7;
     background-color: #585858;
     overflow: hidden;
-    width: 0;
-    height: calc(100% - 88px);
+    width: 350px;
     transition: 0.5s ease-in-out;
     position: absolute;
-    top: calc(88px + 2rem + 20px);
+    top: 88px;
+    left: -350px;
+    bottom: 0;
     z-index: 1;
     will-change: transform;
 }
 
 .offline-nav.open {
-    width: 350px;
+    left: 0;
 }
 
 .offline-nav * {
@@ -117,7 +114,7 @@ header {
 .card-container {
     width: 60%;
     max-width: 700px;
-    padding: 2rem 2rem 0 2rem;
+    padding-top: 1px;
     margin: 0 auto;
 }
 
@@ -137,17 +134,13 @@ header {
 
     .side-nav-switch {
         left: 20px;
-        top: calc(135px + 2rem + 20px);
+        top: calc(135px + 20px);
     }
 
     .offline-nav {
-        top: calc(135px + 2rem + 20px);
-        height: calc(100% - 135px);
-
-    }
-
-    .offline-nav.open {
+        top: 135px;
         width: 60%;
+        left: -60%;
     }
 }
 

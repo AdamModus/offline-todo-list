@@ -82,19 +82,10 @@ document.getElementById("createTODO").onsubmit = function (evt) {
     return false;
 };
 
-document.getElementById("sideNavSwitch").onclick = function (evt) {
-    var nav = document.getElementsByClassName('offline-nav')[0];
-    nav.classList.toggle('open');
+function navBButtonPressedEvtHandler(evt) {
     evt.stopPropagation();
-
-    window.removeEventListener('click', closeFormHandler, false);
-    window.removeEventListener('keydown', closeFormHandler, false);
-
-    if (nav.classList.contains('open')) {
-        window.addEventListener('click', closeFormHandler, false);
-        window.addEventListener('keydown', closeFormHandler, false);
-    }
-};
+    showNav();
+}
 
 function closeFormHandler(evt) {
     var nav = document.getElementsByClassName('offline-nav')[0];
@@ -102,19 +93,90 @@ function closeFormHandler(evt) {
     switch (evt.type) {
         case 'click':
             if (!nav.contains(evt.target)) {
-                window.removeEventListener('click', closeFormHandler, false);
-                window.removeEventListener('keydown', closeFormHandler, false);
-                document.getElementsByClassName('offline-nav')[0].classList.toggle('open');
+                hideNav();
             }
             break;
         case 'keydown':
             if (evt.keyCode == 27) { // escape key maps to keycode `27`
-                window.removeEventListener('click', closeFormHandler, false);
-                window.removeEventListener('keydown', closeFormHandler, false);
-                document.getElementsByClassName('offline-nav')[0].classList.toggle('open');
+                hideNav();
             }
             break;
         default:
             break;
     }
 }
+
+function hideNav() {
+    var nav = document.getElementsByClassName('offline-nav')[0];
+    window.removeEventListener('click', closeFormHandler, false);
+    window.removeEventListener('keydown', closeFormHandler, false);
+    nav.classList.remove('open');
+    nav.style.transform = '';
+}
+
+function showNav() {
+    var nav = document.getElementsByClassName('offline-nav')[0];
+    window.addEventListener('click', closeFormHandler, false);
+    window.addEventListener('keydown', closeFormHandler, false);
+    nav.classList.add('open');
+}
+
+
+function navTouchBehaviour() {
+    var nav = document.getElementsByClassName('offline-nav')[0];
+    var startX, currentX, touchingNav;
+
+    nav.addEventListener('touchstart', onTouchStart);
+    nav.addEventListener('touchmove', onTouchMove);
+    nav.addEventListener('touchend', onTouchEnd);
+
+    function onTouchStart(evt) {
+        startX = evt.touches[0].pageX;
+        currentX = startX;
+        touchingNav = true;
+        nav.style.transition = '0s';
+        requestAnimationFrame(updatePos);
+    }
+
+    function onTouchMove(evt) {
+        if (!touchingNav) {
+            return;
+        }
+
+        currentX = evt.touches[0].pageX;
+        var translateX = Math.min(0, currentX - startX);
+
+        if (translateX < 0) {
+            evt.preventDefault();
+        }
+    }
+
+    function onTouchEnd() {
+        if (!touchingNav) {
+            return;
+        }
+
+        touchingNav = false;
+        nav.style.transition = '0.5s ease-in-out';
+
+        var translateX = Math.min(0, currentX - startX);
+        if (translateX < 0) {
+            hideNav();
+        }
+    }
+
+    function updatePos() {
+        if (!touchingNav) {
+            return;
+        }
+
+        requestAnimationFrame(updatePos);
+
+        var translateX = Math.min(0, currentX - startX);
+        nav.style.transform = `translateX(${translateX}px)`;
+    }
+}
+
+//just assigning stuff
+document.getElementById("sideNavSwitch").onclick = navBButtonPressedEvtHandler;
+navTouchBehaviour();
