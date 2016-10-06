@@ -9,6 +9,7 @@ var urlsToCache = [
   'js/main.js',
   'js/view.js',
   'js/components/ToDoCard.js',
+  'js/components/CardList.js',
   'js/indexedDB/IndexedDBLayer.js',
   'js/indexedDB/TodoListDB.js',
   'js/web-workers/db.js',
