@@ -90,6 +90,10 @@ function filterAction(data) {
   }
 }
 
+function createToast(params) {
+  VanillaToasts.create(params);
+}
+
 function reportSuccess(params) {
   createToast({
     title: params.title,
