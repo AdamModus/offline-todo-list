@@ -23,7 +23,7 @@ var urlsToCache = [
   'imgs/icon/favicon-96x96.png',
   'imgs/icon/favicon-144x144.png',
   'imgs/icon/favicon-196x196.png',
-  'imgs/hamburger.svg'
+  'imgs/plus.svg'
 ];
 
 // used for logging
