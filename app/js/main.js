@@ -1,12 +1,21 @@
 "use strict";
 
-const vtTimeout = 1 * 1000;
+/**
+ * Toast settings
+*/
+// Default time before the toast fades away
+const vtTimeout = 2 * 1000;
 const vtCallback = Function.prototype;
+// Different types of toast notifications
 const vtType = {
   error: "error",
   info: "info",
   success: "success"
 };
+
+/**
+ * List of different commands for the web worker
+ */
 const wwCommands = {
   list: 'list',
   get: 'get',
@@ -91,16 +100,6 @@ function reportSuccess(params) {
   });
 }
 
-function initCards() {
-  cardsClass = new Cards();
-  cardsClass.onCardDelete = function (elem) {
-    let id = elem.getAttribute('identifier');
-    wworker.postMessage({
-      cmd: wwCommands.delete,
-      val: parseInt(id)
-    });
-  }
-}
 
 ///////////////////////////////////////////////////////
 ////////////// Actions ////////////////

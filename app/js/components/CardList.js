@@ -41,3 +41,14 @@ function clearAllCards() {
     container.classList.toggle('fade-out');
   }, 1000)
 }
+
+function initCards() {
+  cardsClass = new Cards();
+  cardsClass.onCardDelete = function (elem) {
+    let id = elem.getAttribute('identifier');
+    wworker.postMessage({
+      cmd: wwCommands.delete,
+      val: parseInt(id)
+    });
+  }
+}
