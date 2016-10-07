@@ -6,7 +6,7 @@ document.getElementById("CleanDB").onclick = function () {
   });
 };
 
-document.getElementById("createTODO").onsubmit = function (evt) {
+function onFormSubmit(evt) {
   evt.preventDefault();
 
   var form = document.getElementById('createTODO');
@@ -128,6 +128,13 @@ function navTouchBehaviour() {
   }
 }
 
-//just assigning stuff
+function onSetMockDataClick() {
+  hideNav();
+  setDefaultTODOs();
+}
+
+// assigning stuff
+document.getElementById("createTODO").onsubmit = onFormSubmit;
+document.getElementById('setMockData').onclick = onSetMockDataClick;
 document.getElementById("sideNavSwitch").onclick = navBButtonPressedEvtHandler;
 navTouchBehaviour();
