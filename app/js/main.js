@@ -172,3 +172,22 @@ function closeAction() {
     callback: vtCallback
   });
 }
+
+/*
+  Observe connectivity changes
+ */
+// Feature detection
+if ('ononline' in window && 'onoffline' in window && typeof navigator.onLine === 'boolean'){
+  var networkConnectivityService = new NetworkConnectivityService();
+  var logConnectivity = function logConnectivity(connectivityState) {
+    if (connectivityState === 'online') {
+      console.log('%c Connectivity: ', 'color:#000; background-color: orange', 'online :)');
+    } else {
+      console.log('%c Connectivity: ', 'color:#000; background-color: orange', 'offline :(');
+    }
+  }
+  networkConnectivityService.onConnectivityChange(function(state){
+    logConnectivity(state);
+  });
+  logConnectivity(networkConnectivityService.getCurrentConnectivity());
+}

@@ -7,6 +7,7 @@ var urlsToCache = [
   'manifest.json',
   // js assets
   'js/main.js',
+  'js/services/NetworkConnectivityService.js',
   'js/components/CardList.js',
   'js/components/SideNavBar.js',
   'js/components/ToDoCard.js',
