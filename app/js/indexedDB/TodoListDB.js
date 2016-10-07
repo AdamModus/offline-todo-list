@@ -26,7 +26,7 @@ let TodoListDB = (function () {
   const storeName = Symbol('storeName'); // database name
 
   //used for logging
-  const logTextColor = "white";
+  const logTextColor = "#000";
   const logBackgroundColor = "#1E90FF";
 
   // indexedDB.deleteDatabase("TODOListStore")
