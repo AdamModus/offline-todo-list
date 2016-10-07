@@ -78,8 +78,6 @@ class Cards {
 
     this.draggingCard = true;
     this.target.style.willChange = 'transform';
-
-    evt.preventDefault();
   }
 
   onMove(evt) {
