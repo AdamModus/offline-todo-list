@@ -10,7 +10,7 @@ document.getElementById("createTODO").onsubmit = function (evt) {
   evt.preventDefault();
 
   var form = document.getElementById('createTODO');
-  var inputs = form.querySelectorAll('input[type="text"');
+  var inputs = form.querySelectorAll('input[type="text"]');
   var textAreas = form.querySelectorAll('textarea');
   var todoJson = {
     id: todoList.length > 0 ? todoList[todoList.length - 1].id + 1 : 0,
