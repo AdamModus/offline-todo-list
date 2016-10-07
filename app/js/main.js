@@ -2,13 +2,14 @@
 
 /**
  * Toast settings
-*/
+ */
 // Default time before the toast fades away
 const vtTimeout = 2 * 1000;
 const vtCallback = Function.prototype;
 // Different types of toast notifications
 const vtType = {
   error: "error",
+  warning: 'warning',
   info: "info",
   success: "success"
 };
@@ -174,10 +175,10 @@ function closeAction() {
 }
 
 /*
-  Observe connectivity changes
+ Observe connectivity changes
  */
 // Feature detection
-if ('ononline' in window && 'onoffline' in window && typeof navigator.onLine === 'boolean'){
+if ('ononline' in window && 'onoffline' in window && typeof navigator.onLine === 'boolean') {
   var networkConnectivityService = new NetworkConnectivityService();
   var connectivityIndicatorElement = document.getElementById('connectivity-indicator');
 
@@ -186,21 +187,37 @@ if ('ononline' in window && 'onoffline' in window && typeof navigator.onLine ===
    *
    * @param connectivityState
    */
-  var connectivityNotifier = function logConnectivity(connectivityState) {
+  var connectivityNotifier = function logConnectivity(connectivityState, notifyUser) {
     if (connectivityState === 'online') {
       console.log('%c Connectivity: ', 'color:#000; background-color: orange', 'online :)');
       connectivityIndicatorElement.className = 'connectivity-online';
+      if (notifyUser) {
+        createToast({
+          title: "Looks like you're online again! (~˘▾˘)~",
+          text: "Your connectivity was restored. Thank god! Websites should work normally again.",
+          type: vtType.success,
+          timeout: 5 * 1000
+        });
+      }
     } else {
       console.log('%c Connectivity: ', 'color:#000; background-color: orange', 'offline :(');
       connectivityIndicatorElement.className = 'connectivity-offline';
+      if (notifyUser) {
+        createToast({
+          title: "Oh, you got offline! (ಥ﹏ಥ)",
+          text: "I'm sorry for your soul, websites might still work but with limited functionality.",
+          type: vtType.warning,
+          timeout: 5 * 1000
+        });
+      }
     }
   };
 
   // Init the connectivity state
-  connectivityNotifier(networkConnectivityService.getCurrentConnectivity());
+  connectivityNotifier(networkConnectivityService.getCurrentConnectivity(), false);
 
   // Observe connectivity changes
-  networkConnectivityService.onConnectivityChange(function(state){
-    connectivityNotifier(state);
+  networkConnectivityService.onConnectivityChange(function (state) {
+    connectivityNotifier(state, true);
   });
 }

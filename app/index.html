@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <link rel="manifest" href="manifest.json">
     <title>Surviving the offline status</title>
-    <link rel="shortcut icon" sizes="16x16 32x32 48x48 57x57 64x64 114x114 120x120 144x144 152x152" href="favicon.ico?v=1.0">
+    <link rel="shortcut icon"
+          sizes="16x16 32x32 48x48 57x57 64x64 114x114 120x120 144x144 152x152"
+          href="favicon.ico?v=1.0">
 
     <!-- Check Service Workers support-->
     <script>
@@ -15,7 +17,7 @@
          *
          * https://developer.mozilla.org/en-US/docs/Web/API/Cache
          */
-        if ( 'serviceWorker' in navigator && (typeof Cache !== 'undefined' && Cache.prototype.addAll) ) {
+        if ('serviceWorker' in navigator && (typeof Cache !== 'undefined' && Cache.prototype.addAll)) {
             console.log('%c Service workers: ', 'color:black; background-color: #FFD700', 'detected support on your browser, awesome!');
             navigator.serviceWorker.register('sw.js', {scope: './'}).then(function (registration) {
                 // Registration was successful! :)
@@ -46,7 +48,7 @@
                 cursor: pointer;
             }
 
-            figure h1.header{
+            figure h1.header {
                 margin: 0;
                 font-size: 1.5rem;
                 max-width: 90%;
@@ -61,7 +63,8 @@
                 top: 1rem;
                 right: 1rem;
             }
-            footer.footer{
+
+            footer.footer {
                 word-break: break-all;
             }
 

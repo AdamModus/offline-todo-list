@@ -9,7 +9,7 @@ class NetworkConnectivityService {
    */
   getCurrentConnectivity() {
     let currentConnectivity = '';
-    if (navigator.onLine === true){
+    if (navigator.onLine === true) {
       currentConnectivity = 'online';
     } else {
       currentConnectivity = 'offline';
@@ -23,11 +23,11 @@ class NetworkConnectivityService {
    * @param callback
    */
   onConnectivityChange(callback) {
-    if (typeof callback === 'function'){
-      window.ononline = function(event) {
+    if (typeof callback === 'function') {
+      window.ononline = function (event) {
         callback('online', event);
       };
-      window.onoffline = function(event) {
+      window.onoffline = function (event) {
         callback('offline', event);
       };
     }

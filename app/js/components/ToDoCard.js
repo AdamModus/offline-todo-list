@@ -31,7 +31,7 @@ class ToDoCard extends HTMLElement {
    * If the browser supports Shadow DOM inject the template in the shadow root of the element.
    * If the browser does not support Shadow DOM inject the template as a child of the component.
    */
-  initTemplate(){
+  initTemplate() {
     let template = document.getElementById('to-do-card-template').content.cloneNode(true);
 
     // Check the support for Shadow DOM
@@ -52,10 +52,11 @@ class ToDoCard extends HTMLElement {
 
     this.templateCreated = true;
   }
+
   /**
    * Updates the content of the render with the values of the attributes.
    */
-  renderTemplate(){
+  renderTemplate() {
     // Ensure the template has been created.
     if (this.templateCreated === true) {
       // Check if the card attributes contain values and update the template.
@@ -65,6 +66,7 @@ class ToDoCard extends HTMLElement {
       this.footerNode.textContent = typeof this.attributes.footer === 'object' ? this.attributes.footer.value : '';
     }
   }
+
   /**
    * Part of any Custom Element reactions.
    *
@@ -75,10 +77,11 @@ class ToDoCard extends HTMLElement {
    * TODO rename this method to connectedCallback when the spec change is implemented in the major browsers:
    * https://github.com/webcomponents/webcomponentsjs/issues/598
    */
-  attachedCallback(){
+  attachedCallback() {
     this.initTemplate();
     this.renderTemplate();
   };
+
   /**
    * Part of any Custom Element reactions.
    *
@@ -86,7 +89,7 @@ class ToDoCard extends HTMLElement {
    * Also called for initial values when an element is created by the parser, or upgraded.
    * Note: only attributes listed in the observedAttributes property will receive this callback.
    */
-  attributeChangedCallback(attrName, oldVal, newVal){
+  attributeChangedCallback(attrName, oldVal, newVal) {
     this.renderTemplate();
   }
 
@@ -95,7 +98,7 @@ class ToDoCard extends HTMLElement {
    *
    * Executed when an instance of the element is created.
    */
-  createdCallback(){
+  createdCallback() {
     this.templateCreated = false;
   }
 
@@ -106,7 +109,7 @@ class ToDoCard extends HTMLElement {
    * See the spec for restrictions on what you can do in the constructor:
    * https://html.spec.whatwg.org/multipage/scripting.html#custom-element-conformance
    */
-  constructor(){
+  constructor() {
     super();
   }
 }

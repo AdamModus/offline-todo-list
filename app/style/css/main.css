@@ -23,11 +23,11 @@ header {
     background: url(../../imgs/offline-rex.jpg) center / contain no-repeat;
 }
 
-span#connectivity-indicator.connectivity-online{
+span#connectivity-indicator.connectivity-online {
     color: green;
 }
 
-span#connectivity-indicator.connectivity-offline{
+span#connectivity-indicator.connectivity-offline {
     color: #CE1F1F;
 }
 
