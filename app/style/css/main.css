@@ -23,6 +23,14 @@ header {
     background: url(../../imgs/offline-rex.jpg) center / contain no-repeat;
 }
 
+span#connectivity-indicator.connectivity-online{
+    color: green;
+}
+
+span#connectivity-indicator.connectivity-offline{
+    color: #CE1F1F;
+}
+
 .side-nav-switch {
     height: 40px;
     width: 40px;
