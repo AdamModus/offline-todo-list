@@ -2,7 +2,7 @@
     "short_name": "Offline survivor",
     "name": "Surviving the offline status",
     "description": "A simply progressive web app.",
-    "background-color": "#FAFAFA",
+    "background_color": "#FAFAFA",
     "icons": [
         {
             "src": "imgs/icon/favicon-96x96.png",
