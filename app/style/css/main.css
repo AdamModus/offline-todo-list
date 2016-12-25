@@ -23,11 +23,11 @@ header {
     background: url(../../imgs/offline-rex.jpg) center / contain no-repeat;
 }
 
-span#connectivity-indicator.connectivity-online {
+#connectivity-indicator.connectivity-online {
     color: green;
 }
 
-span#connectivity-indicator.connectivity-offline {
+#connectivity-indicator.connectivity-offline {
     color: #CE1F1F;
 }
 
@@ -41,7 +41,6 @@ span#connectivity-indicator.connectivity-offline {
     outline: none;
     cursor: pointer;
     background: url(../../imgs/plus.svg) center / 100% no-repeat;
-    transition: 0.5s ease-in-out;
 }
 
 .surviving-offline {
@@ -59,13 +58,13 @@ span#connectivity-indicator.connectivity-offline {
     background-color: #585858;
     overflow: hidden;
     width: 350px;
-    transition: 0.5s ease-in-out;
     position: absolute;
     top: 88px;
     left: -350px;
     bottom: 0;
     z-index: 1;
     will-change: transform;
+    transition: 0.5s ease-in-out;
 }
 
 .offline-nav.open {

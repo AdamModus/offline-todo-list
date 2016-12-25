@@ -57,12 +57,17 @@ function closeFormHandler(evt) {
   }
 }
 
+function onNavTransitionEnd() {
+  this.style.transform = '';
+  this.removeEventListener('transitionend', onNavTransitionEnd, false);
+}
+
 function hideNav() {
   var nav = document.getElementsByClassName('offline-nav')[0];
   window.removeEventListener('click', closeFormHandler, false);
   window.removeEventListener('keydown', closeFormHandler, false);
+  nav.addEventListener('transitionend', onNavTransitionEnd, false);
   nav.classList.remove('open');
-  nav.style.transform = '';
 }
 
 function showNav() {
